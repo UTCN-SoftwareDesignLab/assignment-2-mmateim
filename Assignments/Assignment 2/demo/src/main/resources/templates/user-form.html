@@ -7,12 +7,13 @@
     <title>Create User</title>
 </head>
 <body>
-<form th:action="@{/login/register}" th:object="${user}" method="post">
+<h1 th:text="${message}"></h1>
+<form action="#" th:action="@{/login/register}" name="user" id="user" th:object="${user}" method="post">
     Name: <input type="text" name="name" th:field="${user.name}"/>
     Age: <input type="number" name="age" th:field="${user.age}"/>
     Username: <input type="text" name="username" th:field="${user.username}"/>
     Password: <input type="password" name="password" th:field="${user.password}"/>
-    <button>Create</button>
+    <button type="submit">Create</button>
 </form>
 
 <div th:if="${param.success}">

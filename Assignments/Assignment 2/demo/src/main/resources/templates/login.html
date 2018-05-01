@@ -36,11 +36,11 @@
                 <button class="btn btn-primary"   type="submit" >Login</button>
             </div>
         </div>
-        <!--<div class="form-group">-->
-            <!--<div class="col-sm-offset-4 col-sm-10">-->
-                <!--<button class="btn btn-primary" type="submit" name="action" value="register">Register</button>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-10">
+                <a th:href="@{/register}">Register</a>
+            </div>
+        </div>
 
         <!-- ALERTS -->
         <div th:if="${param.error}" class="alert alert-danger" role="alert">

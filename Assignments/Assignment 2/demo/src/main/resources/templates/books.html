@@ -58,7 +58,7 @@
 <form>
     Genre: <br/>
     <select name="genre" id="genre">
-        <option th:each="book : ${books}" th:value="${book.genre}" th:text="${book.genre}"></option>
+        <option  th:each="book : ${books}" th:value="${book.genre}" th:text="${book.genre}"></option>
     </select> <br/>
     Author: <br/>
     <input type="text" id="author" name="author"/> <br/>
