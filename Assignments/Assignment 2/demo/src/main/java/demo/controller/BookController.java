@@ -67,14 +67,14 @@ public class BookController {
     public String searchBook(Model model, @RequestParam("id") Integer id, @RequestParam("amount") Integer amount) {
         String message = "";
         if (id == null || amount == null) {
-            message = "ID or amount field is empty";
+            message = "! ID or amount field is empty";
         } else {
             Book book = bookService.findById(id);
             if (book == null) {
-                message = "ID or amount field is empty";
+                message = "! invalid ID";
             } else {
                 if (book.getQuantity() < amount) {
-                    message = "Not enough books on stock";
+                    message = "! Not enough books on stock";
                 } else {
                     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
                     String username = auth.getName();
@@ -82,18 +82,18 @@ public class BookController {
                     if (user != null) {
                         Sale sale = new Sale(user.getId(), amount, new Date().getTime(), id);
                         if (saleService.create(sale) == null) {
-                            message = "Error while registering sale";
+                            message = "! Error while registering sale";
                         } else {
                             book.setQuantity(book.getQuantity() - amount);
                             if (bookService.update(book) != null) {
                                 originalBooks = bookService.getAll();
                                 message = "Book sold";
                             } else {
-                                message = "Error while updating book";
+                                message = "! Error while updating book";
                             }
                         }
                     } else {
-                        message = "Null user";
+                        message = "! Null user";
                     }
                 }
             }
