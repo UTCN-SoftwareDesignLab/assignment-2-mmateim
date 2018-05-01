@@ -15,6 +15,13 @@ public class Sale {
     private long date;
     private int bookId;
 
+    public Sale(int userId, int amount, long date, int bookId) {
+        this.userId = userId;
+        this.amount = amount;
+        this.date = date;
+        this.bookId = bookId;
+    }
+
     public int getId() {
         return id;
     }

@@ -15,9 +15,9 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String role = auth.getAuthorities().toString();
 
-        if(role.contains("ADMIN")) {
+        if (role.contains("ADMIN")) {
             System.out.println("Handler : Logged in as ADMIN");
-            return  "/users";
+            return "/users";
         }
         System.out.println("Handler : Logged in as USER");
         return "/books";

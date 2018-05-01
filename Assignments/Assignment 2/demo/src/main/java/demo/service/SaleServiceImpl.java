@@ -21,4 +21,9 @@ public class SaleServiceImpl implements SaleService {
     public List<Sale> getAll() {
         return null;
     }
+
+    @Override
+    public Sale create(Sale sale) {
+        return saleRepository.save(sale);
+    }
 }

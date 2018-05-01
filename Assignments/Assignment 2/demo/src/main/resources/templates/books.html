@@ -24,12 +24,15 @@
 
 
 
+
     </style>
 </head>
 <body>
 <a th:href="@{/logout}">Logout</a>
 
 <h1>Books:</h1>
+
+<label th:title="${message}"></label>
 
 <table>
     <thead>
@@ -57,20 +60,32 @@
 </table>
 
 <hr/>
-
+<br/>
 <form>
-    Genre:
+    Genre: <br/>
     <select name="genre" id="genre">
         <option th:each="book : ${books}" th:value="${book.genre}" th:text="${book.genre}"></option>
-    </select>
-    Author:
-    <input type="text" id="author" name = "author"/>
-    Title:
-    <input type="text" id="name" name="name"/>
+    </select> <br/>
+    Author: <br/>
+    <input type="text" id="author" name="author"/> <br/>
+    Title: <br/>
+    <input type="text" id="name" name="name"/> <br/> <br/>
 
     <button type="submit" name="filter">Filter</button>
 </form>
+<br/>
+<hr/>
+<br/>
+<form>
+    Id: <br/>
+    <input type="number" id="id" name="id"/> <br/> <br/>
+    Amount: <br/>
+    <input type="number" id="amount" name="amount"/> <br/>
 
+    <button type="submit" name="sell">Sell book</button>
+</form>
+<br/>
+<br/>
 <a th:href="@{/authors/create}">Create Author</a>
 </body>
 </html>

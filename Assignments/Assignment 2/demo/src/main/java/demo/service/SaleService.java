@@ -7,4 +7,5 @@ import java.util.List;
 public interface SaleService {
 
     List<Sale> getAll();
+    Sale create(Sale sale);
 }

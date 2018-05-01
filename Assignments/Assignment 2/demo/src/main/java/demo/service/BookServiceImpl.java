@@ -45,5 +45,12 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findByGenreAndAuthor(genre, author);
     }
 
-    //public Book findById(int id){ return bookRepository.findOne(id);}
+    public Book findById(int id) {
+        return bookRepository.findById(id);
+    }
+
+    @Override
+    public Book update(Book book) {
+        return bookRepository.save(book);
+    }
 }
