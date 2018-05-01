@@ -11,7 +11,9 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userId;
+    private int amount;
     private long date;
+    private int bookId;
 
     public int getId() {
         return id;
@@ -35,5 +37,21 @@ public class Sale {
 
     public void setDate(long date) {
         this.date = date;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 }

@@ -16,6 +16,9 @@ public class Book {
     private String isbn;
     private String name;
     private String author;
+    private String genre;
+    private Integer quantity;
+    private Integer price;
 
     public Book(String name, String author, String isbn) {
         this.name = name;
@@ -55,5 +58,29 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }

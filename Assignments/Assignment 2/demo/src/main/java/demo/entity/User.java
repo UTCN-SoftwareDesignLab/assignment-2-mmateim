@@ -14,8 +14,10 @@ public class User {
     private String username;
     private String password;
     private String role;
+    private String name;
+    private int age;
 
-    private User() {
+    public User() {
     }
 
     public User(String username, String password) {
@@ -53,5 +55,21 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

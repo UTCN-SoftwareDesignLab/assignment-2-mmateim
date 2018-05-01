@@ -1,13 +1,13 @@
 package demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.AbstractPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 import javax.sql.DataSource;
 
@@ -23,37 +23,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from users where username = ?")
-                //.authoritiesByUsernameQuery("select user_roles.username, role from user_roles inner join users on users.username = user_roles.username where user_roles.username = ?")
-                //.rolePrefix("ROLE_")
-                .passwordEncoder(new PasswordEncoder() {
-                    @Override
-                    public String encode(CharSequence rawPassword) {
-                        return rawPassword.toString();
-                    }
-
-                    @Override
-                    public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                        return rawPassword.toString().equals(encodedPassword);
-                    }
-                });
+                .usersByUsernameQuery("select username, password, true from users where username = ?")
+                .authoritiesByUsernameQuery("select username, role from users WHERE username = ?")
+                .rolePrefix("ROLE_")
+                .passwordEncoder(new ShaPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .disable()
                 .authorizeRequests()
-                .antMatchers("/js/**").permitAll()
-                //.anyRequest().access("hasRole('ROLE_ADMIN')")
+                    .antMatchers("/login/**").permitAll()
+                    .antMatchers("/users/**").hasRole("ADMIN")
+                    .antMatchers("/books/**").hasAnyRole("ADMIN", "USER")
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                    .loginPage("/login")
+                    .successHandler(authSuccessHandler())
+                    .failureUrl("/login?error");
+
+    }
+
+    @Bean
+    AuthSuccessHandler authSuccessHandler() {
+        return new AuthSuccessHandler();
     }
 }
-
