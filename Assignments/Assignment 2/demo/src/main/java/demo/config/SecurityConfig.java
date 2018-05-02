@@ -33,15 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/login/**").permitAll()
-                    .antMatchers("/users/**").hasRole("ADMIN")
-                    .antMatchers("/books/**").hasAnyRole("ADMIN", "USER")
-                    .antMatchers("/admin-books/**").hasRole("ADMIN")
+                .antMatchers("/login/**").permitAll()
+                .antMatchers("/users/**").hasRole("ADMIN")
+                .antMatchers("/books/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/admin-books/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
-                    .loginPage("/login")
-                    .successHandler(authSuccessHandler())
-                    .failureUrl("/login?error");
+                .loginPage("/login")
+                .successHandler(authSuccessHandler())
+                .failureUrl("/login?error");
 
     }
 

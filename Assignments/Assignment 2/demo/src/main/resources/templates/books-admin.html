@@ -18,6 +18,8 @@
             border: 1px solid black;
         }
 
+
+
     </style>
 </head>
 <body>
@@ -54,11 +56,12 @@
 
 <hr/>
 <br/>
+<h3>All fields must me completed</h3>
 <form action="#" th:action="@{/admin-books}" name="book" id="book" th:object="${book}" method="post">
     Id: <br/>
-    <input type="number" id="id" name="id"/> <br/>
+    <input type="number" id="id" name="id" th:field="${book.id}"/> <br/>
     Title: <br/>
-    <input type="text" id="name" name="name"  th:field="${book.name}"/> <br/>
+    <input type="text" id="name" name="name" th:field="${book.name}"/> <br/>
     Isbn: <br/>
     <input type="text" id="isbn" name="isbn" th:field="${book.isbn}"/> <br/>
     Author: <br/>
@@ -72,6 +75,11 @@
 
     <button type="submit" name="create">Create</button>
     <button type="submit" name="update">Update</button>
+</form>
+<hr/>
+<form>
+    Id: <br/>
+    <input type="number" id="deleteId" name="deleteId"/> <br/> <br/>
     <button type="submit" name="delete">Delete</button>
 </form>
 </body>

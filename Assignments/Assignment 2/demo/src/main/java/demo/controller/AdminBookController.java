@@ -31,54 +31,81 @@ public class AdminBookController {
     }
 
     @RequestMapping(params = "create=", method = RequestMethod.POST)
-    public String createBook(Model model, @ModelAttribute("book") Book book){//, @RequestParam("id") Integer id){
+    public String createBook(Model model, @ModelAttribute("book") Book book) {
         System.out.println("AdminBookController : create");
         String message;
-       // System.out.println("book " + book.toString());
         try {
             BookValidator validator = new BookValidator(book);
             List<String> errors = validator.validate();
-            if(errors.size()!= 0){
+            if (errors.size() != 0) {
                 message = errors.toString();
-            }
-            else {
+            } else {
                 message = "";
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             message = "error : some fields are empty";
         }
-        if(message.equals("")){
-            if(bookService.create(book) == null) {
+        if (message.equals("")) {
+            if (bookService.create(book) == null) {
                 message = "Error sql table book";
-            }
-            else {
+            } else {
                 message = "";
             }
         }
-//        if(message.equals("")){
-//            model.addAttribute("book", new BookDto());
-//        }
-//        else {
-//            model.addAttribute("book", book);
-//        }
+        if (message.equals("")) {
+            model.addAttribute("book", new Book());
+        } else {
+            model.addAttribute("book", book);
+        }
         model.addAttribute("books", bookService.getAll());
         model.addAttribute("message", message);
         return "books-admin";
     }
 
     @RequestMapping(params = "update=", method = RequestMethod.POST)
-    public String updateBook(Model model, @ModelAttribute("book") BookDto book, @RequestParam("id") Integer id){
+    public String updateBook(Model model, @ModelAttribute("book") Book book) {
         System.out.println("AdminBookController : update");
+        String message;
+        try {
+            BookValidator validator = new BookValidator(book);
+            List<String> errors = validator.validate();
+            if (errors.size() != 0) {
+                message = errors.toString();
+            } else {
+                message = "";
+            }
+        } catch (Exception e) {
+            message = "error : some fields are empty";
+        }
+        if (message.equals("")) {
+            if (bookService.update(book) == null) {
+                message = "Error sql table book";
+            } else {
+                message = "";
+            }
+        }
+        if (message.equals("")) {
+            model.addAttribute("book", new Book());
+        } else {
+            model.addAttribute("book", book);
+        }
         model.addAttribute("books", bookService.getAll());
-        model.addAttribute("message", "");
+        model.addAttribute("message", message);
         return "books-admin";
     }
 
-    @RequestMapping(params = "delete=", method = RequestMethod.POST)
-    public String deleteBook(Model model, @ModelAttribute("book") BookDto book, @RequestParam("id") Integer id){
+    @RequestMapping(params = "delete=", method = RequestMethod.GET)
+    public String deleteBook(Model model, @RequestParam("deleteId") Integer deleteId) {
         System.out.println("AdminBookController : delete");
+        String message = "";
+        if (deleteId != null) {
+            bookService.delete(deleteId);
+        } else {
+            message = "Id field is empty";
+        }
         model.addAttribute("books", bookService.getAll());
-        model.addAttribute("message", "");
+        model.addAttribute("message", message);
+        model.addAttribute("book", new Book());
         return "books-admin";
     }
 }
