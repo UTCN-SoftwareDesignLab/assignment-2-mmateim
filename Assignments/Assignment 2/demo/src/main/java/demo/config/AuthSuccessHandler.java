@@ -1,6 +1,5 @@
 package demo.config;
 
-import org.codehaus.groovy.runtime.powerassert.SourceText;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -17,7 +16,7 @@ public class AuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessHa
 
         if (role.contains("ADMIN")) {
             System.out.println("Handler : Logged in as ADMIN");
-            return "/users";
+            return "/admin-books";
         }
         System.out.println("Handler : Logged in as USER");
         return "/books";

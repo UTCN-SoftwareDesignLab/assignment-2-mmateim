@@ -25,9 +25,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book create(BookDto bookDto) {
-        Book b = new Book(bookDto.name, bookDto.author, bookDto.isbn);
-        return bookRepository.save(b);
+    public Book create(Book book) {
+        return bookRepository.save(book);
     }
 
     @Override

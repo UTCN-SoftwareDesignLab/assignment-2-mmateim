@@ -70,4 +70,10 @@ public class LoginController {
         }
         return "redirect:/login?logout";
     }
+
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String onError(Model model){
+        System.out.println("Error");
+        return "error";
+    }
 }

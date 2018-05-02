@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(unique = true)
     private String isbn;
@@ -18,15 +18,18 @@ public class Book {
     private String author;
     private String genre;
     private Integer quantity;
-    private Integer price;
+    private Float price;
 
-    public Book(String name, String author, String isbn) {
+    public Book(String isbn, String name, String author, String genre, Integer quantity, Float price) {
+        this.isbn = isbn;
         this.name = name;
         this.author = author;
-        this.isbn = isbn;
+        this.genre = genre;
+        this.quantity = quantity;
+        this.price = price;
     }
 
-    private Book() {}
+    public Book() {}
 
     public String getIsbn() {
         return isbn;
@@ -76,11 +79,16 @@ public class Book {
         this.quantity = quantity;
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "title " + name + " author " + author + " genre " + genre + " isbn " + isbn + " quantity " + quantity + " price " + price;
     }
 }

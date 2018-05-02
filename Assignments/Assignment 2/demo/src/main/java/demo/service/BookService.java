@@ -8,7 +8,7 @@ import java.util.List;
 public interface BookService {
     List<Book> getAll();
 
-    Book create(BookDto book);
+    Book create(Book book);
 
     List<Book> findByGenre(String genre);
 

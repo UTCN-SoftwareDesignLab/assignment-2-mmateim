@@ -3,8 +3,6 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Books</title>
-    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>-->
-    <!--<script type="text/javascript" src="books.js"></script>-->
     <style>
         td {
             width: 200px;
@@ -20,11 +18,11 @@
             border: 1px solid black;
         }
 
-
     </style>
 </head>
 <body>
 <a th:href="@{/logout}">Logout</a>
+<a th:href="@{/users}">Users</a>
 
 <h1>Books:</h1>
 <h2 th:text="${message}"></h2>
@@ -42,7 +40,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="book : ${filteredBooks}">
+    <tr th:each="book : ${books}">
         <td th:text="${book.id}"></td>
         <td th:text="${book.name}"></td>
         <td th:text="${book.isbn}"></td>
@@ -56,28 +54,25 @@
 
 <hr/>
 <br/>
-<form>
-    Genre: <br/>
-    <select name="genre" id="genre">
-        <option th:each="book : ${books}" th:value="${book.genre}" th:text="${book.genre}"></option>
-    </select> <br/>
-    Author: <br/>
-    <input type="text" id="author" name="author"/> <br/>
-    Title: <br/>
-    <input type="text" id="name" name="name"/> <br/> <br/>
-
-    <button type="submit" name="filter">Filter</button>
-</form>
-<br/>
-<hr/>
-<br/>
-<form>
+<form action="#" th:action="@{/admin-books}" name="book" id="book" th:object="${book}" method="post">
     Id: <br/>
-    <input type="number" id="id" name="id"/> <br/> <br/>
-    Amount: <br/>
-    <input type="number" id="amount" name="amount"/> <br/>
+    <input type="number" id="id" name="id"/> <br/>
+    Title: <br/>
+    <input type="text" id="name" name="name"  th:field="${book.name}"/> <br/>
+    Isbn: <br/>
+    <input type="text" id="isbn" name="isbn" th:field="${book.isbn}"/> <br/>
+    Author: <br/>
+    <input type="text" id="author" name="author" th:field="${book.author}"/> <br/>
+    Genre: <br/>
+    <input type="text" id="genre" name="genre" th:field="${book.genre}"/> <br/>
+    Quantity: <br/>
+    <input type="number" id="quantity" name="quantity" th:field="${book.quantity}"/> <br/>
+    Price: <br/>
+    <input type="number" id="price" name="price" th:field="${book.price}"/> <br/>
 
-    <button type="submit" name="sell">Sell book</button>
+    <button type="submit" name="create">Create</button>
+    <button type="submit" name="update">Update</button>
+    <button type="submit" name="delete">Delete</button>
 </form>
 </body>
 </html>
