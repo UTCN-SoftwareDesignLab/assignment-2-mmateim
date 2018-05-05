@@ -8,4 +8,6 @@ public interface UserService {
     List<User> getAll();
     User findByUsername(String username);
     User create(User user);
+    void delete(int userId);
+    User update(User user);
 }
