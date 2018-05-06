@@ -38,12 +38,9 @@ public class ReportController {
 
         List<Book> books = (List<Book>) bookService.findEmptyStock();
         ByteArrayOutputStream outputStream = GeneratePdfReport.booksReport(books);
-        ByteArrayInputStream bis = new ByteArrayInputStream(outputStream.toByteArray());
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=emptyStockBooks.pdf");
-
-        String filename = "D:\\facultate\\an3\\sem2\\SD\\Ass2\\assignment-2-mmateim\\Assignments\\Assignment 2\\demo\\src\\main\\java\\demo\\booksEmptyStock.pdf";
+        String filename = "D:\\facultate\\an3\\sem2\\SD\\Ass2\\assignment-2-mmateim\\Assignments\\Assignment 2\\demo\\src\\main\\java\\demo\\emptyStockBooks.pdf";
         File file = new File(filename);
         if (!file.exists()){
            if(!file.createNewFile()){
@@ -51,11 +48,14 @@ public class ReportController {
            }
         }
         InputStream in = new FileInputStream(file);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=emptyStockBooks.pdf");
         ResponseEntity<InputStreamResource> response = ResponseEntity
                 .ok()
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
+                .body(new InputStreamResource(inputStream));
         FileCopyUtils.copy(in, outputStream);
         return response;
     }
