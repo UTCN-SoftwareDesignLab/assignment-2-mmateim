@@ -65,7 +65,6 @@ public class GeneratePdfReport {
             PdfWriter.getInstance(document, outputStream);
             document.open();
             document.add(table);
-
             document.close();
 
         } catch (DocumentException ex) {

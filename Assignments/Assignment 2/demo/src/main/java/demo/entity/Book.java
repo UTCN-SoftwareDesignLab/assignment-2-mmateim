@@ -29,7 +29,8 @@ public class Book {
         this.price = price;
     }
 
-    public Book() {}
+    public Book() {
+    }
 
     public String getIsbn() {
         return isbn;
@@ -89,6 +90,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "title " + name + " author " + author + " genre " + genre + " isbn " + isbn + " quantity " + quantity + " price " + price;
+        return "title: " + name + ";  author: " + author + ";  genre: " + genre + ";  isbn: " + isbn + ";  quantity: " + quantity + ";  price: " + price + ";";
     }
 }
