@@ -46,6 +46,7 @@ public class ReportService {
             contentStream.newLineAtOffset(50, 685);
             contentStream.showText(message);
             contentStream.newLine();
+            contentStream.newLine();
             for (Book book : books) {
                 contentStream.showText(book.toString());
                 contentStream.newLine();
