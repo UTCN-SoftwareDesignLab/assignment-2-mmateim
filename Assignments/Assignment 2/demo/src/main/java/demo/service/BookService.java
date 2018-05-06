@@ -16,6 +16,8 @@ public interface BookService {
 
     List<Book> findByGenreAndAuthor(String genre, String author);
 
+    List<Book> findEmptyStock();
+
     Book findById(int id);
 
     Book update(Book book);

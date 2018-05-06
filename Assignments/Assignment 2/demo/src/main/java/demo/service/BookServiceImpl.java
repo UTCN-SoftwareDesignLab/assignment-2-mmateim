@@ -44,6 +44,11 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findByGenreAndAuthor(genre, author);
     }
 
+    @Override
+    public List<Book> findEmptyStock() {
+        return bookRepository.findByQuantity(0);
+    }
+
     public Book findById(int id) {
         return bookRepository.findById(id);
     }

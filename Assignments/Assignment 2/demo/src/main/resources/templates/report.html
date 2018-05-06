@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reports</title>
+</head>
+<body>
+<a th:href="@{/logout}">Logout</a>
+<a th:href="@{/admin-books}">Books</a>
+<a th:href="@{/users}">Users</a>
+
+<h1>Generate:</h1>
+<h2 th:text="${message}"></h2>
+
+<form>
+    Type: <br/>
+    <button type="submit" name="pdf">PDF</button>
+    <button type="submit" name="csv">CSV</button>
+</form>
+
+</body>
+</html>
